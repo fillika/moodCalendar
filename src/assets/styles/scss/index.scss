@@ -35,8 +35,10 @@ body {
 
 .month {
     font-size: 1.15em;
+    margin-bottom: 1.5em;
 
     table {
+        margin: 0 auto;
 
         th {
             width: 2.5em;
@@ -64,13 +66,18 @@ body {
         margin-bottom: 0.6em;
     }
 
+    &-wrapper {
+        @include minWidth($mobile) {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+    }
+
     @include minWidth($mobile) {
         width: 48.5%;
     }
     @include minWidth($tablet) {
         width: 31.5%;
-    }
-    @include minWidth($large) {
-        width: 23.5%;
     }
 }
