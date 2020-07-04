@@ -45,7 +45,7 @@ export default class Calendar {
   }
 
   private createMonth(days: string[], currentYear: number, monthName: string, monthIndex: number): void {
-    const yearContainer = document.getElementById('year');
+    const yearContainer: HTMLElement = document.getElementById('year');
     const div: HTMLElement = createEl('div');
     const table: HTMLElement = createEl('table');
     const thead: HTMLElement = createEl('thead');
@@ -86,8 +86,8 @@ export default class Calendar {
       function createTdArray(dayOfWeek: number, totalDays: number): HTMLElement[] {
         const arr: HTMLElement[] = [];
         let day = 0;
-        // 35 ячеек создаются (5 рядов по 7 дней в ряду, пустые скрываются стилями
-        for (let i = 0; i < 35; i++) {
+        // 42 ячеек создаются (6 рядов по 7 дней в ряду, пустые скрываются стилями
+        for (let i = 0; i < 42; i++) {
           const td: HTMLElement = createEl('td');
           /**
            * Проверка на кол-во дней. Заполняются только дни в месяце. А так же только начиная со дня недели
@@ -200,7 +200,7 @@ export default class Calendar {
 
       if (className === 'cancel') {
         parent.removeChild(child);
-        return
+        return;
       }
 
       parent.className = '';
