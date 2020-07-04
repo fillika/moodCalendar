@@ -1,0 +1,39 @@
+@import 'fonts';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pacifico', sans-serif;
+    font-size: calc(15px + 100vw/144);
+}
+
+.main {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.img {
+    background-image: url('~@images/scss.png');
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 160px;
+    background-size: cover;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        font-size: calc(12px + 100vw/144);
+    }
+}
+
+
+@media screen and (min-width: 1440px) {
+    body {
+        font-size: 20px;
+    }
+}

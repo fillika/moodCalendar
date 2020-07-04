@@ -1,0 +1,46 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "google"
+    ],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "@typescript-eslint/rule-name": "off",
+        "no-console": "error",
+        "arrow-parens": "off",
+        "indent": [
+            "error",
+            2
+        ],
+        "max-len": [
+            "error",
+            {
+                "ignoreUrls": true,
+                "code": 120
+            }
+        ],
+        "require-jsdoc": "off",
+        "operator-linebreak": "off",
+        "no-unused-vars": "warn",
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ]
+    }
+}
