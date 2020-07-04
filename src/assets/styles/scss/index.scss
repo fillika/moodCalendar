@@ -46,10 +46,15 @@ body {
             text-align: center;
             height: 1.5em;
             cursor: pointer;
+
             @include transition(background-color);
 
             &:active {
                 background-color: orange;
+            }
+
+            &:empty {
+                pointer-events: none;
             }
         }
     }
