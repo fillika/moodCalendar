@@ -1,0 +1,15 @@
+@mixin minWidth($breakpoint) {
+    @media screen and (min-width: $breakpoint) {
+        @content
+    }
+}
+
+@mixin maxWidth($breakpoint) {
+    @media screen and (max-width: $breakpoint) {
+        @content
+    }
+}
+
+@mixin transition($target, $time: 220ms,  $animationType: linear) {
+    transition: $target $time $animationType;
+}

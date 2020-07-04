@@ -1,14 +1,25 @@
 @import 'fonts';
+@import 'mixins';
+@import 'vars';
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    line-height: 1.2;
 }
 
 body {
-    font-family: 'Pacifico', sans-serif;
-    font-size: calc(15px + 100vw/144);
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: calc(15px + 100vw / 144);
+
+    @include minWidth($tablet) {
+        font-size: calc(12px + 100vw / 144);
+    }
+
+    @include minWidth(1440px) {
+        font-size: 20px;
+    }
 }
 
 .main {
@@ -17,23 +28,44 @@ body {
     padding: 0 15px;
 }
 
-.img {
-    background-image: url('~@images/scss.png');
-    background-repeat: no-repeat;
-    width: 160px;
-    height: 160px;
-    background-size: cover;
+.year {
+    text-align: center;
+    margin-bottom: 2em;
 }
 
-@media screen and (min-width: 768px) {
-    body {
-        font-size: calc(12px + 100vw/144);
+.month {
+    font-size: 1.15em;
+
+    table {
+
+        th {
+            width: 2.5em;
+        }
+
+        td {
+            text-align: center;
+            height: 1.5em;
+            cursor: pointer;
+            @include transition(background-color);
+
+            &:active {
+                background-color: orange;
+            }
+        }
     }
-}
 
+    &-name {
+        text-align: center;
+        margin-bottom: 0.6em;
+    }
 
-@media screen and (min-width: 1440px) {
-    body {
-        font-size: 20px;
+    @include minWidth($mobile) {
+        width: 48.5%;
+    }
+    @include minWidth($tablet) {
+        width: 31.5%;
+    }
+    @include minWidth($large) {
+        width: 23.5%;
     }
 }
