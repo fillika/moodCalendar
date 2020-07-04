@@ -1,4 +1,4 @@
-import { createEl, getDaysInMonth, getRightDay } from './helpers';
+import { createEl, getDaysInMonth, getRightDay, removeChild } from './helpers';
 
 export interface iCalendar {
   currentYear: number;
@@ -40,6 +40,8 @@ export default class Calendar {
     this.months.forEach((month, i) => {
       this.createMonth(this.days, this.currentYear, month, i);
     });
+
+    this.setMood();
   }
 
   private createMonth(days: string[], currentYear: number, monthName: string, monthIndex: number): void {
@@ -78,6 +80,9 @@ export default class Calendar {
       const totalDays: number = getDaysInMonth(month); // кол-во дней в месяце
       const tdArray = createTdArray(dayOfWeek, totalDays);
 
+      /**
+       * Тут Я создаю ячейки <td> с датами и помещаю их в массив
+       */
       function createTdArray(dayOfWeek: number, totalDays: number): HTMLElement[] {
         const arr: HTMLElement[] = [];
         let day = 0;
@@ -90,6 +95,7 @@ export default class Calendar {
            */
           if (i >= dayOfWeek && i < totalDays + dayOfWeek) {
             day = day + 1;
+            td.classList.add('day');
             td.innerHTML = day.toString();
           }
 
@@ -131,5 +137,74 @@ export default class Calendar {
     createWeekString(days, tr);
     createDays(currentYear, monthIndex);
     appendMonth();
+  }
+
+  private setMood(): void {
+    const dayCells: NodeListOf<HTMLElement> = document.querySelectorAll('.day');
+
+    dayCells.forEach(day => {
+      day.addEventListener('click', (e) => {
+
+        /**
+         * Проверка на то, чтобы при клике на mood у меня не вызывалась снова функция
+         * и работал другой функционал
+         */
+        if (e.target instanceof HTMLElement) {
+          if (e.target.classList.contains('day__moods') || e.target.classList.contains('material-icons')) {
+            const className = e.target.dataset.mood;
+
+            replaceMood(e.target, className);
+            return;
+          }
+        }
+
+        /**
+         * Для удаления всех mood перед открытием нового
+         */
+        removeChild('.day__moods');
+
+        createMoodSelector(day);
+      });
+    });
+
+    function createMoodSelector(parent: HTMLElement) {
+      const moodEmotions: string[] = [
+        'mood_bad',
+        'sentiment_very_dissatisfied',
+        'sentiment_dissatisfied',
+        'sentiment_satisfied',
+        'sentiment_very_satisfied',
+        'cancel',
+      ];
+      const div = createEl('div');
+
+      div.classList.add('day__moods');
+
+      moodEmotions.forEach(mood => {
+        const span = createEl('span');
+        span.innerHTML = mood;
+        span.classList.add('material-icons', 'material-icons__mood', mood);
+        span.dataset.mood = mood;
+        div.appendChild(span);
+      });
+
+      parent.appendChild(div);
+    }
+
+    /**
+     * Установить Mood в ячейку-родитель
+     */
+    function replaceMood(target: HTMLElement, className: string) {
+      const parent = target.closest('.day');
+      const child = parent.querySelector('.day__moods');
+
+      if (className === 'cancel') {
+        parent.removeChild(child);
+        return
+      }
+
+      parent.className = '';
+      parent.classList.add('day', className);
+    }
   }
 }

@@ -81,3 +81,117 @@ body {
         width: 31.5%;
     }
 }
+
+.day {
+    position: relative;
+
+    &__moods {
+
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 100%);
+        border-radius: 20px;
+        background-color: white;
+        overflow: hidden;
+        z-index: 1000;
+        padding: 0.2em;
+        box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.5);
+        animation: moodVisibleMobile 220ms linear forwards;
+
+        @include minWidth($mobile) {
+            flex-direction: row;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            animation: moodVisibleDesktop 220ms linear forwards;
+        }
+    }
+
+    &.sentiment {
+
+        &_very_dissatisfied {
+            color: #fff;
+            background-color: gray;
+        }
+
+        &_satisfied {
+            color: #fff;
+            background-color: #7fffd4;
+        }
+
+        &_dissatisfied {
+            color: #fff;
+            background-color: #000;
+        }
+
+        &_very_satisfied {
+            color: #fff;
+            background-color: green;
+        }
+    }
+
+    &.mood_bad {
+        color: #fff;
+        background-color: red;
+    }
+}
+
+.material-icons {
+    &__mood {
+        font-size: 2.4em;
+    }
+}
+
+.mood_bad {
+    color: red;
+}
+
+.cancel {
+    color: black;
+}
+
+.sentiment {
+    &_very_dissatisfied {
+        color: gray;
+    }
+
+    &_satisfied {
+        color: aquamarine;
+    }
+
+    &_dissatisfied {
+        color: #000;
+    }
+
+    &_very_satisfied {
+        color: green;
+    }
+}
+
+@keyframes moodVisibleMobile {
+    0% {
+        height: 0;
+    }
+    99% {
+        height: 200px;
+    }
+    100% {
+        width: auto;
+    }
+}
+
+
+@keyframes moodVisibleDesktop {
+    0% {
+        width: 0;
+    }
+    99% {
+        width: 300px;
+    }
+    100% {
+        width: auto;
+    }
+}

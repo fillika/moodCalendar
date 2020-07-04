@@ -15,3 +15,13 @@ export function getRightDay(year: number, month: number): number {
 
   return numberOfWeekDay;
 }
+
+export function removeChild(selector: string): void {
+  const dayMoods: NodeListOf<HTMLElement> = document.querySelectorAll(selector);
+
+  dayMoods.forEach(dayMood => {
+    if (dayMood.parentElement) {
+      dayMood.parentElement.removeChild(dayMood);
+    }
+  });
+}
